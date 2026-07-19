@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Registration - SwiftRail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+        <div class="glass-card" style="width: 100%; max-width: 550px; margin: 2rem 0;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="fa-solid fa-user-plus" style="font-size: 3rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                <h2 style="margin-top: 1rem;">Passenger Registration</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">Create an account to book tickets and manage itineraries</p>
+            </div>
+
+            <div id="register-error" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: var(--danger); padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 0.9rem; display: none;">
+                <!-- Error text injected here -->
+            </div>
+
+            <form id="register-form">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="reg-name"><i class="fa-solid fa-user"></i> Full Name</label>
+                        <input type="text" id="reg-name" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                        <input type="email" id="reg-email" placeholder="john@example.com" required>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label for="reg-phone"><i class="fa-solid fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="reg-phone" placeholder="9876543210" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-gender"><i class="fa-solid fa-venus-mars"></i> Gender</label>
+                        <select id="reg-gender" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-age"><i class="fa-solid fa-calendar"></i> Age</label>
+                        <input type="number" id="reg-age" min="1" max="120" placeholder="25" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-address"><i class="fa-solid fa-map-location-dot"></i> Home Address</label>
+                    <textarea id="reg-address" rows="3" placeholder="Enter your full mailing address..." required></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label for="reg-password"><i class="fa-solid fa-key"></i> Choose Password</label>
+                    <input type="password" id="reg-password" placeholder="Min 6 characters" minlength="6" required>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; padding: 0.9rem;"><i class="fa-solid fa-user-check"></i> Register Passenger</button>
+            </form>
+
+            <div class="form-footer">
+                Already have an account? <a href="login.html" style="font-weight: 600;">Login here</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

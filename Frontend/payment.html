@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Portal - SwiftRail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+        <div class="glass-card" style="width: 100%; max-width: 500px;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="fa-solid fa-shield-halved" style="font-size: 3rem; color: var(--success);"></i>
+                <h2 style="margin-top: 1rem;">Secure Payment Gateway</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Please choose your preferred transaction method</p>
+            </div>
+
+            <!-- Loading overlay or state -->
+            <div id="payment-loader" style="text-align: center; padding: 2rem;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-light);"></i>
+            </div>
+
+            <div id="payment-main-content" style="display: none;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.2rem; border-radius: var(--radius-sm); margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">Booking ID</span>
+                        <strong id="pay-booking-id">#401</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">Passenger Name</span>
+                        <strong id="pay-passenger-name">Rahul Sharma</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 0.75rem; margin-top: 0.75rem;">
+                        <span style="font-weight: 600;">Amount Payable</span>
+                        <strong id="pay-amount" style="font-size: 1.4rem; color: var(--primary-light);">₹1200.00</strong>
+                    </div>
+                </div>
+
+                <form id="payment-form">
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label for="pay-method"><i class="fa-solid fa-wallet"></i> Choose Payment Method</label>
+                        <select id="pay-method" required>
+                            <option value="" disabled selected>Select Payment Method</option>
+                            <option value="UPI">UPI (Google Pay, PhonePe, Paytm)</option>
+                            <option value="Credit Card">Credit Card (Visa, MasterCard, Amex)</option>
+                            <option value="Debit Card">Debit Card (Rupay, Visa, Maestro)</option>
+                            <option value="Net Banking">Net Banking (SBI, HDFC, ICICI)</option>
+                            <option value="Wallet">Wallet (Paytm, Mobikwik)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; padding: 0.9rem;" id="payment-submit-btn">
+                        <i class="fa-solid fa-lock-open"></i> Authorize & Pay ₹0.00
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Success/Failed State Panel -->
+            <div id="payment-status-panel" style="display: none; text-align: center; padding: 2rem 0;">
+                <div id="payment-status-icon-container" style="margin-bottom: 1.5rem;">
+                    <!-- Status Icon will be injected -->
+                </div>
+                <h2 id="payment-status-title" style="margin-bottom: 0.5rem;">Payment Successful!</h2>
+                <p id="payment-status-msg" style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.95rem;">Your booking is now confirmed. Safe travels!</p>
+                
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); text-align: left; margin-bottom: 2rem; font-size: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                        <span style="color: var(--text-secondary);">Transaction ID:</span>
+                        <strong id="status-txn-id">TXN123456789</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-secondary);">Allocated Seat:</span>
+                        <strong id="status-seat-num">C5-18</strong>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="booking_history.html" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Bookings</a>
+                    <a href="passenger_dashboard.html" class="btn"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

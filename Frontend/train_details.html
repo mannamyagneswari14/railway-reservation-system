@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Details - SwiftRail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div style="margin-bottom: 1.5rem;">
+            <a href="javascript:history.back()" style="display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Search Results
+            </a>
+        </div>
+
+        <div class="glass-card" id="train-details-panel">
+            <!-- Dynamically populated train details -->
+            <div style="text-align: center; padding: 3rem;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary-light);"></i>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">Loading train information...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

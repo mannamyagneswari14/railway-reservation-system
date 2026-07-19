@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Dashboard - SwiftRail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for analytics graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="glass-card sidebar-menu">
+                <div style="text-align: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                    <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--primary-gradient); display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; box-shadow: var(--shadow-glow);">
+                        <i class="fa-solid fa-user-astronaut" style="font-size: 2.2rem; color: #fff;"></i>
+                    </div>
+                    <h3 id="sidebar-user-name">Loading...</h3>
+                    <span id="sidebar-user-email" style="font-size: 0.85rem; color: var(--text-secondary);">user@example.com</span>
+                </div>
+                
+                <a href="passenger_dashboard.html" class="sidebar-link active">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard Analytics
+                </a>
+                <a href="booking_history.html" class="sidebar-link">
+                    <i class="fa-solid fa-history"></i> My Bookings
+                </a>
+                <a href="trains.html" class="sidebar-link">
+                    <i class="fa-solid fa-magnifying-glass"></i> Book a Ticket
+                </a>
+                <a href="#" id="sidebar-logout-btn" class="sidebar-link" style="color: var(--danger); margin-top: auto;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </a>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                <!-- Summary Metrics (Stats Grid) -->
+                <div class="stat-grid">
+                    <div class="glass-card stat-card">
+                        <div class="stat-info">
+                            <h5>Total Bookings</h5>
+                            <span class="value" id="stat-total-bookings">0</span>
+                        </div>
+                        <i class="fa-solid fa-ticket stat-icon"></i>
+                    </div>
+
+                    <div class="glass-card stat-card">
+                        <div class="stat-info">
+                            <h5>Upcoming Trips</h5>
+                            <span class="value" id="stat-upcoming" style="color: var(--info);">0</span>
+                        </div>
+                        <i class="fa-solid fa-train stat-icon" style="color: var(--info);"></i>
+                    </div>
+
+                    <div class="glass-card stat-card">
+                        <div class="stat-info">
+                            <h5>Cancelled Trips</h5>
+                            <span class="value" id="stat-cancelled" style="color: var(--danger);">0</span>
+                        </div>
+                        <i class="fa-solid fa-rectangle-xmark stat-icon" style="color: var(--danger);"></i>
+                    </div>
+
+                    <div class="glass-card stat-card">
+                        <div class="stat-info">
+                            <h5>Total Expenses</h5>
+                            <span class="value" id="stat-expenses" style="color: var(--success);">₹0.00</span>
+                        </div>
+                        <i class="fa-solid fa-indian-rupee-sign stat-icon" style="color: var(--success);"></i>
+                    </div>
+                </div>
+
+                <!-- Spending & Distribution Chart (Bonus Feature) -->
+                <div class="grid-2">
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-chart-bar" style="color: var(--primary-light);"></i> Spending History</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Total money spent on travel reservations by date</p>
+                        <div style="height: 250px; position: relative;">
+                            <canvas id="spendingChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-chart-pie" style="color: var(--primary-light);"></i> Coach Preferences</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Ticket distribution by coach class preference</p>
+                        <div style="height: 250px; position: relative; display: flex; justify-content: center;">
+                            <canvas id="coachChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction Log Table -->
+                <div class="glass-card">
+                    <div class="glass-card-header">
+                        <h3><i class="fa-solid fa-receipt"></i> Recent Transaction Log</h3>
+                    </div>
+                    <div class="table-container" style="border: none;">
+                        <table id="payments-history-table">
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Booking ID</th>
+                                    <th>Payment Method</th>
+                                    <th>Paid Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payments-history-body">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; padding: 2rem;">
+                                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; color: var(--primary-light);"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

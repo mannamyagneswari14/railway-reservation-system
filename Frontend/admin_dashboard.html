@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Operations Center - SwiftRail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Admin Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail <span style="font-size: 0.8rem; background: var(--danger); color: #fff; padding: 0.1rem 0.5rem; border-radius: 4px; vertical-align: middle; margin-left: 0.5rem;">ADMIN</span>
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-layout">
+            <!-- Admin Navigation Panel -->
+            <aside class="glass-card sidebar-menu">
+                <h3 style="margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                    <i class="fa-solid fa-screwdriver-wrench" style="color: var(--danger);"></i> Admin Panel
+                </h3>
+                
+                <a href="#" class="sidebar-link active" data-tab="tab-passengers">
+                    <i class="fa-solid fa-users"></i> Manage Passengers
+                </a>
+                <a href="#" class="sidebar-link" data-tab="tab-trains">
+                    <i class="fa-solid fa-train"></i> Manage Trains
+                </a>
+                <a href="#" class="sidebar-link" data-tab="tab-schedules">
+                    <i class="fa-solid fa-calendar-alt"></i> Route & Schedules
+                </a>
+                <a href="#" class="sidebar-link" data-tab="tab-bookings">
+                    <i class="fa-solid fa-ticket"></i> Manage Bookings
+                </a>
+                <a href="#" class="sidebar-link" data-tab="tab-payments">
+                    <i class="fa-solid fa-credit-card"></i> Manage Payments
+                </a>
+                <a href="#" class="sidebar-link" data-tab="tab-analytics">
+                    <i class="fa-solid fa-chart-line"></i> Visual Analytics
+                </a>
+                <a href="#" id="admin-logout-btn" class="sidebar-link" style="color: var(--danger); margin-top: auto;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Admin Logout
+                </a>
+            </aside>
+
+            <!-- Workspace panels -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                
+                <!-- 1. Passengers Tab -->
+                <section id="tab-passengers" class="tab-content active glass-card">
+                    <div class="admin-header-actions">
+                        <h3><i class="fa-solid fa-users"></i> Passengers Registry</h3>
+                        <button class="btn" onclick="openAddModal('passenger')"><i class="fa-solid fa-user-plus"></i> Add Passenger</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-passengers-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 2. Trains Tab -->
+                <section id="tab-trains" class="tab-content glass-card">
+                    <div class="admin-header-actions">
+                        <h3><i class="fa-solid fa-train"></i> Train Fleet Registry</h3>
+                        <button class="btn" onclick="openAddModal('train')"><i class="fa-solid fa-plus"></i> Add Train</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Train Number</th>
+                                    <th>Train Name</th>
+                                    <th>Type</th>
+                                    <th>Total Seats</th>
+                                    <th>Route</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-trains-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 3. Schedules Tab -->
+                <section id="tab-schedules" class="tab-content glass-card">
+                    <div class="admin-header-actions">
+                        <h3><i class="fa-solid fa-calendar-days"></i> Routing & Time Schedules</h3>
+                        <button class="btn" onclick="openAddModal('schedule')"><i class="fa-solid fa-calendar-plus"></i> Add Schedule</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Train Name</th>
+                                    <th>From -> To</th>
+                                    <th>Departure</th>
+                                    <th>Arrival</th>
+                                    <th>Fare</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-schedules-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 4. Bookings Tab -->
+                <section id="tab-bookings" class="tab-content glass-card">
+                    <div class="admin-header-actions">
+                        <h3><i class="fa-solid fa-ticket"></i> Master Reservations Log</h3>
+                        <button class="btn" onclick="openAddModal('booking')"><i class="fa-solid fa-plus"></i> Add Booking</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Passenger</th>
+                                    <th>Train</th>
+                                    <th>Date</th>
+                                    <th>Route</th>
+                                    <th>Coach/Seat</th>
+                                    <th>Fare</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-bookings-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 5. Payments Tab -->
+                <section id="tab-payments" class="tab-content glass-card">
+                    <div class="admin-header-actions">
+                        <h3><i class="fa-solid fa-credit-card"></i> Finance & Payment Audits</h3>
+                        <button class="btn" onclick="openAddModal('payment')"><i class="fa-solid fa-plus"></i> Add Payment</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Booking ID</th>
+                                    <th>Passenger Name</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                    <th>Transaction ID</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-payments-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 6. Analytics Tab -->
+                <section id="tab-analytics" class="tab-content glass-card">
+                    <div class="admin-header-actions" style="margin-bottom: 2rem;">
+                        <h3><i class="fa-solid fa-chart-line"></i> Master System Analytics</h3>
+                    </div>
+                    <div class="grid-2">
+                        <div class="glass-card" style="background: rgba(255, 255, 255, 0.01); border-color: var(--border-color);">
+                            <h4 style="margin-bottom: 1rem;"><i class="fa-solid fa-chart-column" style="color: var(--primary-light);"></i> Revenue by Train</h4>
+                            <div style="height: 250px; position: relative;">
+                                <canvas id="adminRevenueChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="glass-card" style="background: rgba(255, 255, 255, 0.01); border-color: var(--border-color);">
+                            <h4 style="margin-bottom: 1rem;"><i class="fa-solid fa-chart-pie" style="color: var(--primary-light);"></i> Booking Status Distribution</h4>
+                            <div style="height: 250px; position: relative; display: flex; justify-content: center;">
+                                <canvas id="adminBookingsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Admin Form Modals (Hidden Overlay) -->
+    <div class="modal-overlay" id="admin-modal">
+        <div class="modal-content" style="max-width: 650px;">
+            <button class="modal-close" onclick="closeAdminModal()">&times;</button>
+            <h2 id="admin-modal-title" style="margin-bottom: 1.5rem;">Add/Edit Record</h2>
+            <form id="admin-modal-form">
+                <!-- Injected form fields dynamically depending on context -->
+                <div id="admin-modal-fields-container"></div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeAdminModal()">Cancel</button>
+                    <button type="submit" class="btn" id="admin-modal-submit-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

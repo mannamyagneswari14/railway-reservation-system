@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History - SwiftRail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf.js for PDF ticket generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h2 style="margin-bottom: 2rem;"><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary-light);"></i> Journey Booking History</h2>
+
+        <div class="glass-card" style="margin-bottom: 2rem;">
+            <div class="glass-card-header" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+                <h3><i class="fa-solid fa-plane-arrival"></i> Your Itineraries</h3>
+                <span id="history-count-badge" class="status-pill pending">Loading...</span>
+            </div>
+            
+            <div class="table-container" style="border: none;">
+                <table id="bookings-history-table">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Train Name</th>
+                            <th>Journey Date</th>
+                            <th>From -> To</th>
+                            <th>Coach & Seat</th>
+                            <th>Fare</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-history-body">
+                        <!-- Loaded dynamically via script.js -->
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 3rem;">
+                                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-light);"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Ticket Preview & Download -->
+    <div class="modal-overlay" id="ticket-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="ticket-modal-close">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-ticket" style="color: var(--primary-light);"></i> Electronic Reservation Slip (ERS)</h2>
+            
+            <div class="ticket-view" id="modal-ticket-container">
+                <!-- Populated dynamically -->
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end;">
+                <button class="btn btn-secondary" id="modal-download-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
+                <button class="btn" id="ticket-modal-ok">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

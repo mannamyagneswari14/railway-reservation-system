@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Trains - SwiftRail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html" class="active"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Horizontal Search Form -->
+        <div class="glass-card" style="margin-bottom: 2rem;">
+            <form id="horizontal-search-form" class="search-bar-horizontal">
+                <div class="form-group">
+                    <label for="h-source"><i class="fa-solid fa-location-dot"></i> From</label>
+                    <select id="h-source" required>
+                        <option value="" disabled>Select Source</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Bhopal">Bhopal</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="h-destination"><i class="fa-solid fa-map-pin"></i> To</label>
+                    <select id="h-destination" required>
+                        <option value="" disabled>Select Destination</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Bhopal">Bhopal</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="h-date"><i class="fa-solid fa-calendar-days"></i> Date</label>
+                    <input type="date" id="h-date" required>
+                </div>
+                <button type="submit" class="btn" style="height: 43px;"><i class="fa-solid fa-arrows-rotate"></i> Update</button>
+            </form>
+        </div>
+
+        <!-- Advanced Filters & Sorting (Bonus Feature) -->
+        <div class="filters-panel">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-filter" style="color: var(--primary-light);"></i>
+                <strong style="font-size: 0.95rem;">Filters:</strong>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-type">Train Type:</label>
+                <select id="filter-type">
+                    <option value="ALL">All Types</option>
+                    <option value="Express">Express</option>
+                    <option value="Superfast">Superfast</option>
+                    <option value="Passenger">Passenger</option>
+                    <option value="Rajdhani">Rajdhani</option>
+                    <option value="Shatabdi">Shatabdi</option>
+                    <option value="Vande Bharat">Vande Bharat</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-time">Departure Time:</label>
+                <select id="filter-time">
+                    <option value="ALL">Anytime</option>
+                    <option value="MORNING">Morning (06:00 - 12:00)</option>
+                    <option value="AFTERNOON">Afternoon (12:00 - 18:00)</option>
+                    <option value="EVENING">Evening (18:00 - 24:00)</option>
+                    <option value="NIGHT">Night (00:00 - 06:00)</option>
+                </select>
+            </div>
+
+            <div class="filter-group" style="margin-left: auto;">
+                <label for="sort-by"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort By:</label>
+                <select id="sort-by">
+                    <option value="TIME_ASC">Departure (Earliest)</option>
+                    <option value="FARE_ASC">Fare (Lowest)</option>
+                    <option value="DURATION_ASC">Duration (Shortest)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Trains List Area -->
+        <section id="trains-section">
+            <h2 id="search-results-title" style="margin-bottom: 1.5rem; font-size: 1.5rem;">Matching Schedules</h2>
+            
+            <div id="trains-list-container">
+                <!-- Dynamically loaded train cards -->
+                <div style="text-align: center; padding: 3rem;" id="train-loader">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary-light);"></i>
+                    <p style="margin-top: 1rem; color: var(--text-secondary);">Enter search details above to view schedules...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

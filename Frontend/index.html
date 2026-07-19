@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftRail - Railway Reservation System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf.js for PDF ticket generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="trains.html"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</a></li>
+                    <!-- Dynamic links will be injected by script.js based on auth state -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Search -->
+        <section class="hero">
+            <h1>Experience Next-Gen Railway Travel</h1>
+            <p>Search trains, check live seat availability, book in seconds, and track PNR status on India's premier booking platform.</p>
+            
+            <div class="glass-card search-card pulse-target" style="max-width: 850px; margin: 0 auto; text-align: left;">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-route" style="color: var(--primary-light);"></i> Book Your Journey</h3>
+                <form id="train-search-form" class="grid-3" style="align-items: flex-end; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="search-source"><i class="fa-solid fa-location-dot"></i> Source Station</label>
+                        <select id="search-source" required>
+                            <option value="" disabled selected>Select Source</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Kolkata">Kolkata</option>
+                            <option value="Bhopal">Bhopal</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-destination"><i class="fa-solid fa-map-pin"></i> Destination Station</label>
+                        <select id="search-destination" required>
+                            <option value="" disabled selected>Select Destination</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Kolkata">Kolkata</option>
+                            <option value="Bhopal">Bhopal</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-date"><i class="fa-solid fa-calendar-days"></i> Journey Date</label>
+                        <input type="date" id="search-date" required>
+                    </div>
+                </form>
+                <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+                    <button type="submit" form="train-search-form" class="btn"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PNR Status Widget (Bonus Feature) -->
+        <section style="margin: 4rem 0;">
+            <div class="glass-card" style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(13, 20, 38, 0.8) 100%);">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <i class="fa-solid fa-ticket" style="font-size: 2rem; color: var(--primary-light);"></i>
+                    <div>
+                        <h3>Track PNR / Booking Status</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Check booking status and download ticket PDF using Booking ID</p>
+                    </div>
+                </div>
+                <div class="form-group" style="display: flex; flex-direction: row; gap: 0.5rem; margin-bottom: 0;">
+                    <input type="number" id="pnr-input" placeholder="Enter Booking ID (e.g. 401)" style="flex: 1;">
+                    <button class="btn" id="pnr-search-btn"><i class="fa-solid fa-search"></i> Track</button>
+                </div>
+                <div id="pnr-error" style="color: var(--danger); margin-top: 0.5rem; font-size: 0.9rem; display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Popular Routes Section -->
+        <section style="margin: 5rem 0;">
+            <h2 class="section-title">Popular Train Routes</h2>
+            <div class="grid-3" id="popular-routes-container">
+                <!-- Route Cards -->
+                <div class="glass-card route-card">
+                    <div class="route-header">
+                        <div class="route-path">
+                            <span>Chennai</span>
+                            <i class="fa-solid fa-arrow-right-long" style="color: var(--primary-light);"></i>
+                            <span>Bangalore</span>
+                        </div>
+                        <span class="route-price">₹1200</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Vande Bharat Express • 4 hrs 30 mins</p>
+                    <button class="btn btn-secondary quick-search-btn" data-source="Chennai" data-dest="Bangalore"><i class="fa-solid fa-bolt"></i> Book Now</button>
+                </div>
+
+                <div class="glass-card route-card">
+                    <div class="route-header">
+                        <div class="route-path">
+                            <span>Delhi</span>
+                            <i class="fa-solid fa-arrow-right-long" style="color: var(--primary-light);"></i>
+                            <span>Mumbai</span>
+                        </div>
+                        <span class="route-price">₹2400</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Rajdhani Express • 15 hrs 40 mins</p>
+                    <button class="btn btn-secondary quick-search-btn" data-source="Delhi" data-dest="Mumbai"><i class="fa-solid fa-bolt"></i> Book Now</button>
+                </div>
+
+                <div class="glass-card route-card">
+                    <div class="route-header">
+                        <div class="route-path">
+                            <span>Delhi</span>
+                            <i class="fa-solid fa-arrow-right-long" style="color: var(--primary-light);"></i>
+                            <span>Bhopal</span>
+                        </div>
+                        <span class="route-price">₹1050</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Shatabdi Express • 8 hrs 40 mins</p>
+                    <button class="btn btn-secondary quick-search-btn" data-source="Delhi" data-dest="Bhopal"><i class="fa-solid fa-bolt"></i> Book Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Offers Section -->
+        <section style="margin: 5rem 0;">
+            <h2 class="section-title">Latest Promotional Offers</h2>
+            <div class="grid-2">
+                <div class="glass-card offer-banner">
+                    <div class="offer-tag">UPI Exclusive</div>
+                    <h3>Get 15% Off with UPI Payments</h3>
+                    <p style="color: var(--text-secondary); margin: 0.5rem 0 1.5rem;">Use any UPI app to pay for your tickets and enjoy instant discount up to ₹150. Valid on sleeper and chair class bookings.</p>
+                    <span style="font-weight: 700; color: var(--primary-light);">Code: SWIFTUPI</span>
+                </div>
+
+                <div class="glass-card offer-banner">
+                    <div class="offer-tag" style="background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);">Monsoon Special</div>
+                    <h3>Zero Service Charges on Credit Cards</h3>
+                    <p style="color: var(--text-secondary); margin: 0.5rem 0 1.5rem;">Book any Rajdhani, Shatabdi or Vande Bharat Express using major credit cards with zero gateway transaction charges.</p>
+                    <span style="font-weight: 700; color: var(--primary-light);">Auto-Applied at Payment</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for PNR Status (Bonus Feature) -->
+    <div class="modal-overlay" id="pnr-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="pnr-modal-close">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-circle-check" style="color: var(--success);"></i> PNR Inquiry Results</h2>
+            <div class="ticket-view" id="pnr-ticket-container">
+                <!-- Injected by script.js -->
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end;">
+                <button class="btn btn-secondary" id="pnr-download-btn"><i class="fa-solid fa-download"></i> PDF Ticket</button>
+                <button class="btn" id="pnr-modal-ok">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-train-subway"></i> SwiftRail
+            </div>
+            <p style="color: var(--text-muted);">&copy; 2026 SwiftRail Corporation. All Rights Reserved.</p>
+            <div style="display: flex; gap: 1rem; font-size: 1.25rem;">
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
