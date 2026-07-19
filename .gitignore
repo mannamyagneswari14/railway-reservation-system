@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Node / NPM packages
+node_modules/
+package-lock.json
+package.json
+
 # Environments
 .env
 .venv
@@ -22,3 +27,4 @@ ENV/
 # Media / OS files
 .DS_Store
 Thumbs.db
+linkdin.png

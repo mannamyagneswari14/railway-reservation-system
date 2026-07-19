@@ -9,11 +9,17 @@ SwiftRail is a complete, state-of-the-art **Railway Reservation System** web app
 ### 🖥️ Modern Glassmorphic Homepage
 ![SwiftRail Homepage](assets/homepage.png)
 
+### 📈 Passenger Dashboard & Interactive Analytics
+![Passenger Dashboard](assets/passenger_dashboard.png)
+
+### ⚙️ Admin Operations Control Center
+![Admin Dashboard](assets/admin_dashboard.png)
+
 ### 📊 SQLite Database Registry (Seeded Data)
-![Database Screenshot](assets/database.svg)
+![Database Screenshot](assets/database.png)
 
 ### 📡 API Verification in Postman
-![Postman API Testing](assets/postman.svg)
+![Postman API Testing](assets/postman.png)
 
 ---
 
